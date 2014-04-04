@@ -13,9 +13,9 @@ GDCM with python wrapper
 How To
 --------
 
-```
+``
 import dicomimg as di
-```
+``
 
 Credits
 --------
