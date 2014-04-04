@@ -2,4 +2,22 @@
 DicomImg
 ========
 
-`DicomImg` is a Python (2 and 3) library for extracting images from DICOM files.
+A python package that validates, reads, and extracts images from a DICOM file.
+
+Dependencies 
+--------
+numpy
+Pillow
+GDCM with python wrapper
+
+How To
+--------
+
+```
+import dicomimg as di
+```
+
+Credits
+--------
+
+Eric Bower
