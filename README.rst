@@ -16,7 +16,7 @@ Setup
 GDCM Python on Debian
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: 
+.. code:: bash
     
     apt-get install python-gdcm
 
@@ -27,7 +27,7 @@ GDCM Pythohn from source
 PRE-REQS
 ~~~~~~~~
 
-.. code::
+.. code:: bash
 	$ apt-get install cmake-curses-gui
 	$ apt-get install libpcre3 libpcre3-dev
 
@@ -37,7 +37,8 @@ SWIG
 * Download the latest version of SWIG
 * Extract compressed file e.g. swig-2.0.11
 
-.. code::
+.. code:: bash
+
 	$ cd swig-2.0.11
 	$ ./configure
 	$ make
@@ -50,7 +51,8 @@ GDCM
 * Download the latest version of GDCM
 * Extract compressed file to desired location e.g. ~/gdcm.tar.bz2
 
-.. code::
+.. code:: bash
+
 	$ mkdir gdcm-build
 	$ cd gdcm
 	$ rm CMakeCache.txt
@@ -66,7 +68,8 @@ GDCM
 * SET GDCM\_WRAP\_PYTHON to ON
 * [G] to generate
 
-.. code::
+.. code:: bash
+
 	$ make
 	$ sudo make install
 
@@ -79,7 +82,8 @@ e.g. ~/.virtualenvs/dcmdb/lib/python2.7/site-packages
 
 Create gdcm.pth file with absolute path to gdcm-build/bin
 
-.. code::
+.. code:: bash
+
 	/home/{user}/gdcm-build/bin
 
 Quick How To
