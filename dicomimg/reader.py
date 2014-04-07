@@ -1,4 +1,3 @@
-import re
 import gdcm
 from .base import BaseDicom
 
