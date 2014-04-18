@@ -3,7 +3,7 @@ Abstract class that Image, Validator, and Reader inherit
 """
 import gdcm
 
-class BaseDicom():
+class BaseDicom(object):
 	
 	def __init__(self, fname):
 		self.fname = fname

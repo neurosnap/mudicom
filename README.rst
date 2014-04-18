@@ -45,7 +45,7 @@ SWIG
 
 	$ sudo apt-get install swig2.0
 
-- OR - 
+OR 
 
 .. code:: bash
 

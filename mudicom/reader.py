@@ -3,8 +3,37 @@ from .base import BaseDicom
 
 class Reader(BaseDicom):
 
+	def __init__(self, fname):
+		super(Reader, self).__init__(fname)
+		self.get_dataset()
+
 	def get_element(self, group=None, element=None, name=None, VR=None):
 		""" Finds a data element in the DICOM file """
+		results = self.dataset
+		if group is not None:
+			def find_group(data_element):
+				if (data_element['tag_group'] == group 
+					or int(data_element['tag_group'], 16) == group):
+						return True
+				else:
+					return False
+			results = filter(find_group, results)
+
+		if element is not None:
+			def find_element(data_element):
+				if (data_element['tag_element'] == element
+					or int(data_element['tag_element'], 16) == element):
+						return True
+				else:
+					return False
+			results = filter(find_element, results)
+
+		if len(results) == 0:
+			return None
+		elif len(results) == 1:
+			return results[0] 
+		else:
+			return results
 
 	def map_VR(self, VR=None, description=None):
 		""" Value Representation (VR) lookup """
