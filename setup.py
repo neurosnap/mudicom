@@ -17,14 +17,14 @@ def find_version(fname):
 		raise RuntimeError('Cannot find version information')
 	return version
 
-__version__ = find_version('dicomimg/__init__.py')
+__version__ = find_version('mudicom/__init__.py')
 
 setup(
-	name='DicomImg',
+	name='mudicom',
 	version=__version__,
 	author='Eric Bower',
 	author_email='neurosnap@gmail.com',
 	packages=find_packages(),
-	url='http://pypi.python.org/pypi/DicomImg/',
+	url='http://pypi.python.org/pypi/mudicom/',
 	license='LICENSE',
 )

@@ -1,5 +1,5 @@
 
-DicomImg
+mudicom
 ========
 
 A python package that validates, reads, and extracts images from a DICOM file.
@@ -18,9 +18,13 @@ GDCM Python on Debian
 
 .. code:: bash
     
-    apt-get install python-gdcm
+    $ apt-get install python-gdcm
 
-GDCM Pythohn from source
+If you are using virtualenv then you must create symbolic links 
+from /usr/lib/python2.7/dist-packages to virtualenv folder.  See 
+below for a quick how-to
+
+GDCM Python from source
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -28,6 +32,7 @@ PRE-REQS
 ~~~~~~~~
 
 .. code:: bash
+
 	$ apt-get install cmake-curses-gui
 	$ apt-get install libpcre3 libpcre3-dev
 
@@ -78,20 +83,22 @@ Create link to python modules
 
 Navigate to virtualenvs or 
 default python site-packages directory 
-e.g. ~/.virtualenvs/dcmdb/lib/python2.7/site-packages
+e.g. ~/.virtualenvs/mudicom/lib/python2.7/site-packages
 
-Create gdcm.pth file with absolute path to gdcm-build/bin
+Create symbolic links to absolute path of gdcm.py gdcmswig.py _gdcmswig.so
 
 .. code:: bash
 
-	/home/{user}/gdcm-build/bin
+	$ ln -s /usr/lib/python2.7/dist-packages/gdcm.py gdcm.py
+	$ ln -s /usr/lib/python2.7/dist-packages/gdcmswig.py gdcmswig.py
+	$ ln -s /usr/lib/python2.7/dist-packages/_gdcmswig.so _gdcmswig.so
 
 Quick How To
 ------------
 
 .. code:: python
 
-    import dicomimg as di
+    import mudicom
 
 Credits
 -------

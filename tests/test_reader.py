@@ -3,7 +3,7 @@ import sys
 import unittest
 import gdcm
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir)))
-from dicomimg import Reader
+from mudicom import Reader
 
 # DICOM files to test
 fnames = ("dicoms/ex1.dcm", "dicoms/ex2.dcm",)
