@@ -3,7 +3,7 @@ from .base import BaseDicom
 
 class Reader(BaseDicom):
 
-	def get_element(self, tag=None, name=None, VR=None):
+	def get_element(self, group=None, element=None, name=None, VR=None):
 		""" Finds a data element in the DICOM file """
 
 	def map_VR(self, VR=None, description=None):
@@ -37,6 +37,18 @@ class Reader(BaseDicom):
 			"US": "Unsigned Short",
 			"UT": "Unlimited Text"
 		}
+		if VR:
+			if VR in value_repr:
+				return value_repr[VR]
+			else:
+				raise Exception("VR not found in map")
+		elif description:
+			for key, value in value_repr.iteritems():
+				if description == value:
+					return key
+			raise Exception("Description not found in map")
+		else:
+			raise Exception("Either VR or description required to map_VR")
 
 	def get_dataset(self):
 		""" Returns array of dictionaries containing
@@ -46,13 +58,15 @@ class Reader(BaseDicom):
 			return self.dataset
 
 		def ds(data_element):
+			tg = data_element.GetTag()
 			value = self.str_filter.ToStringPair(data_element.GetTag())
 			if value[1]:
 				value_repr = str(data_element.GetVR()).strip()
-				#tag = self.get_tag(data_element.GetTag())
 				dict_element = {
 					"name": value[0].strip(),
-					"tag": str(data_element.GetTag()).strip(),
+					"tag_group": hex(int(tg.GetGroup())),
+					"tag_element": hex(int(tg.GetElement())),
+					"tag_str": str(data_element.GetTag()).strip(),
 					"value": value[1].strip(),
 					"value_repr": value_repr,
 					"value_length": str(data_element.GetVL()).strip()
@@ -60,7 +74,7 @@ class Reader(BaseDicom):
 
 				return dict_element
 
-		self.dataset = tuple(self.walk_dataset(ds))
+		self.dataset = self.walk_dataset(ds)
 		return self.dataset
 
 	def walk_dataset(self, fn):
