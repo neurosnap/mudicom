@@ -28,12 +28,7 @@ class Reader(BaseDicom):
 					return False
 			results = filter(find_element, results)
 
-		if len(results) == 0:
-			return None
-		elif len(results) == 1:
-			return results[0] 
-		else:
-			return results
+		return results
 
 	def map_VR(self, VR=None, description=None):
 		""" Value Representation (VR) lookup """
