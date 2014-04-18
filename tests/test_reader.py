@@ -73,9 +73,9 @@ class TestReader(unittest.TestCase):
 	def test_get_element(self):
 		for fname in fnames:
 			reader = Reader(fname)
-			#self.assertIsInstance(reader.get_element((0x004, 0x1220)), dict)
-			#self.assertIsInstance(reader.get_element(name="Modality"), dict)
-			#self.assertIsInstance(reader.get_element(VR="PN"), tuple)
+			self.assertIsInstance(reader.get_element(0x004, 0x1220), list)
+			self.assertIsInstance(reader.get_element(name="Modality"), list)
+			self.assertIsInstance(reader.get_element(VR="PN"), list)
 
 		
 if __name__ == '__main__':
