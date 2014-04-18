@@ -24,9 +24,8 @@ If you are using virtualenv then you must create symbolic links
 from /usr/lib/python2.7/dist-packages to virtualenv folder.  See 
 below for a quick how-to
 
-GDCM Python from source
-~~~~~~~~~~~~~~~~~~~~~~~~
-
+GDCM Python from source on Linux
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PRE-REQS
 ~~~~~~~~
@@ -78,8 +77,8 @@ GDCM
 	$ make
 	$ sudo make install
 
-Create link to python modules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Virtualenvs: Create link to python modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Navigate to virtualenvs or 
 default python site-packages directory 
@@ -93,6 +92,18 @@ Create symbolic links to absolute path of gdcm.py gdcmswig.py _gdcmswig.so
 	$ ln -s /usr/lib/python2.7/dist-packages/gdcmswig.py gdcmswig.py
 	$ ln -s /usr/lib/python2.7/dist-packages/_gdcmswig.so _gdcmswig.so
 
+GDCM on Windows
+~~~~~~~~~~~~~~~
+
+The easiest way is to simply run the windows installer, which will
+also install the python wrappers.
+
+http://sourceforge.net/projects/gdcm/
+
+Then you can copy and paste gdcm.py, gdcmswig.py, and _gdcmswig.so from gdcm/bin into
+your python site-packages folder.
+
+
 Quick How To
 ------------
 
@@ -104,3 +115,6 @@ Credits
 -------
 
 Eric Bower
+
+Special thanks to [Mathieu Malaterre](https://github.com/malaterre)
+(primary developer for GDCM), of which none of this would be possible.
