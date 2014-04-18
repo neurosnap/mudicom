@@ -116,5 +116,7 @@ Credits
 
 Eric Bower
 
-Special thanks to [Mathieu Malaterre](https://github.com/malaterre)
-(primary developer for GDCM), of which none of this would be possible.
+Special thanks to `Mathieu Malaterre`_ (primary developer for GDCM), 
+of which none of this would be possible.
+
+.. _Mathieu Malaterre: https://github.com/malaterre
