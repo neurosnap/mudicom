@@ -43,6 +43,12 @@ SWIG
 
 .. code:: bash
 
+	$ sudo apt-get install swig2.0
+
+- OR - 
+
+.. code:: bash
+
 	$ cd swig-2.0.11
 	$ ./configure
 	$ make
@@ -67,7 +73,7 @@ GDCM
 * Screen will come up,
 * Press [T] to go to advanced mode
 * SET CMAKE\_C\_FLAGS to -fPIC
-* SET CMAKE\_CXX\_FLAGS to -fPIC [Could be optional]
+* SET CMAKE\_CXX\_FLAGS to -fPIC
 * Press [C] to configure
 * SET GDCM\_WRAP\_PYTHON to ON
 * [G] to generate
