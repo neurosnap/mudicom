@@ -1,3 +1,5 @@
+Makefile
+conf.py
 index.rst
 _build
 _static
