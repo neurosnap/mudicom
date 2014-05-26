@@ -1,3 +1,7 @@
+index.rst
+_build
+_static
+_templates
 *.py[cod]
 *.egg
 *.egg-info

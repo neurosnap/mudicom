@@ -1,6 +1,7 @@
 import gdcm
 from .base import BaseDicom
 
+
 class Reader(BaseDicom):
 
 	def __init__(self, fname):
@@ -29,6 +30,45 @@ class Reader(BaseDicom):
 			results = filter(find_element, results)
 
 		return results
+
+	def get_dataset(self):
+		""" Returns array of dictionaries containing
+		all the data elements in the DICOM
+		"""
+		if hasattr(self, "dataset"):
+			return self.dataset
+
+		def ds(data_element):
+			tg = data_element.GetTag()
+			value = self.str_filter.ToStringPair(data_element.GetTag())
+			if value[1]:
+				value_repr = str(data_element.GetVR()).strip()
+				dict_element = {
+					"name": value[0].strip(),
+					"tag_group": hex(int(tg.GetGroup())),
+					"tag_element": hex(int(tg.GetElement())),
+					"tag_str": str(data_element.GetTag()).strip(),
+					"value": value[1].strip(),
+					"value_repr": value_repr,
+					"value_length": str(data_element.GetVL()).strip()
+				}
+
+				return dict_element
+
+		self.dataset = [data for data in self.walk_dataset(ds) if data is not None]
+		return self.dataset
+
+	def walk_dataset(self, fn):
+		""" Loops through all data elements and
+		allows a function to interact with each data element """
+		if not hasattr(fn, "__call__"):
+			raise Exception("walk_dataset requires a function as its parameter")
+
+		dataset = self.file.GetDataSet()
+		iterator = dataset.GetDES().begin()
+		while (not iterator.equal(dataset.GetDES().end())):
+			data_element = iterator.next()
+			yield fn(data_element)
 
 	def map_VR(self, VR=None, description=None):
 		""" Value Representation (VR) lookup """
@@ -73,47 +113,3 @@ class Reader(BaseDicom):
 			raise Exception("Description not found in map")
 		else:
 			raise Exception("Either VR or description required to map_VR")
-
-	def get_dataset(self):
-		""" Returns array of dictionaries containing
-		all the data elements in the DICOM
-		"""
-		if hasattr(self, "dataset"):
-			return self.dataset
-
-		def ds(data_element):
-			tg = data_element.GetTag()
-			value = self.str_filter.ToStringPair(data_element.GetTag())
-			if value[1]:
-				value_repr = str(data_element.GetVR()).strip()
-				dict_element = {
-					"name": value[0].strip(),
-					"tag_group": hex(int(tg.GetGroup())),
-					"tag_element": hex(int(tg.GetElement())),
-					"tag_str": str(data_element.GetTag()).strip(),
-					"value": value[1].strip(),
-					"value_repr": value_repr,
-					"value_length": str(data_element.GetVL()).strip()
-				}
-
-				return dict_element
-
-		self.dataset = self.walk_dataset(ds)
-		return self.dataset
-
-	def walk_dataset(self, fn):
-		""" Loops through all data elements and
-		allows a function to interact with each data element """
-		if not hasattr(fn, "__call__"):
-			raise Exception("walk_dataset requires a function as its parameter")
-
-		dataset = self.file.GetDataSet()
-		result = []
-		iterator = dataset.GetDES().begin()
-		while (not iterator.equal(dataset.GetDES().end())):
-			data_element = iterator.next()
-			res = fn(data_element)
-			if res:
-				result.append(res)
-
-		return result
