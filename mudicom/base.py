@@ -1,12 +1,14 @@
 """
 Abstract class that Image, Validator, and Reader inherit
 """
+import os
 import gdcm
 
 class BaseDicom(object):
 	
 	def __init__(self, fname):
 		self.fname = fname
+		self.file_name, self.file_extension = os.path.splitext(fname)
 		self.gdcm = gdcm
 		
 		reader = gdcm.Reader()
