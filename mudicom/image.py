@@ -4,7 +4,7 @@ import numpy
 import gdcm
 
 from .base import BaseDicom
-from .reader import Reader
+from .read import Read
 
 
 class Image(BaseDicom):
@@ -22,7 +22,7 @@ class Image(BaseDicom):
         pixel_array = gdcm_to_numpy(image_reader.GetImage())
         return pixel_array
 
-    def save_image_plt(self, fname, pixel_array, vmin=None, vmax=None, 
+    def save_image_plt(self, fname, pixel_array, vmin=None, vmax=None,
         cmap=None, format=None, origin=None):
         """ Requires matplotlib """
         from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -59,7 +59,7 @@ def gdcm_to_numpy(image):
         gdcm.PixelFormat.UINT32:   numpy.uint32,
         gdcm.PixelFormat.INT32:    numpy.int32,
         gdcm.PixelFormat.FLOAT32:  numpy.float32,
-        gdcm.PixelFormat.FLOAT64:  numpy.float64 
+        gdcm.PixelFormat.FLOAT64:  numpy.float64
     }
     pixel_format = image.GetPixelFormat().GetScalarType()
     if pixel_format in gdcm_typemap:

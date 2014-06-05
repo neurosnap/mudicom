@@ -2,10 +2,10 @@ import gdcm
 from .base import BaseDicom
 
 
-class Reader(BaseDicom):
+class Read(BaseDicom):
 
 	def __init__(self, fname):
-		super(Reader, self).__init__(fname)
+		super(Read, self).__init__(fname)
 		self.get_dataset()
 
 	def get_element(self, group=None, element=None, name=None, VR=None):
@@ -13,7 +13,7 @@ class Reader(BaseDicom):
 		results = self.dataset
 		if group is not None:
 			def find_group(data_element):
-				if (data_element['tag_group'] == group 
+				if (data_element['tag_group'] == group
 					or int(data_element['tag_group'], 16) == group):
 						return True
 				else:

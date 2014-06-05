@@ -1,6 +1,6 @@
 import unittest
 import gdcm
-from mudicom import Reader, Image
+from mudicom import Read, Image
 
 
 class TestImage(unittest.TestCase):

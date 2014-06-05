@@ -1,19 +1,19 @@
 import unittest
 import gdcm
-from mudicom import Reader
+from mudicom import Read
 
 # DICOM files to test
 fnames = ("dicoms/ex1.dcm", "dicoms/ex2.dcm",)
 types = ("hi there", 0, 123213, {}, [], (), True, False)
 
-class TestReader(unittest.TestCase):
+class TestRead(unittest.TestCase):
 
 	def setUp(self):
 		pass
 
 	def test_get_dataset(self):
 		for fname in fnames:
-			reader = Reader(fname)
+			reader = Read(fname)
 			ds = reader.get_dataset()
 			self.assertIsInstance(ds, list)
 			self.assertIsNot(len(ds), 0)
@@ -28,7 +28,7 @@ class TestReader(unittest.TestCase):
 				self.assertTrue("value_length" in element)
 
 	def test_map_VR(self):
-		reader = Reader(fnames[0])
+		reader = Read(fnames[0])
 		self.assertEqual(reader.map_VR(VR="AE"), "Application Entity")
 		self.assertEqual(reader.map_VR("OB"), "Other Byte")
 		self.assertEqual(reader.map_VR("US"), "Unsigned Short")
@@ -41,7 +41,7 @@ class TestReader(unittest.TestCase):
 
 	def test_walk_dataset(self):
 		for fname in fnames:
-			reader = Reader(fname)
+			reader = Read(fname)
 
 			tags = list(reader.walk_dataset(lambda ds: ds.GetTag()))
 			self.assertIsInstance(tags, list)
@@ -69,11 +69,10 @@ class TestReader(unittest.TestCase):
 
 	def test_get_element(self):
 		for fname in fnames:
-			reader = Reader(fname)
+			reader = Read(fname)
 			self.assertIsInstance(reader.get_element(0x004, 0x1220), list)
 			self.assertIsInstance(reader.get_element(name="Modality"), list)
 			self.assertIsInstance(reader.get_element(VR="PN"), list)
 
-		
 if __name__ == '__main__':
 	unittest.main(verbosity=2)
