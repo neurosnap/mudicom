@@ -7,8 +7,9 @@ A python package that validates, reads, and extracts images from a DICOM file.
 Dependencies 
 ------------
 - numpy
-- Pillow
+- Pillow (or matplotlib)
 - GDCM with python wrapper
+- dicom3tools
 
 Setup
 -----
@@ -94,9 +95,9 @@ Create symbolic links to absolute path of gdcm.py gdcmswig.py _gdcmswig.so
 
 .. code:: bash
 
-	$ ln -s /usr/lib/python2.7/dist-packages/gdcm.py gdcm.py
-	$ ln -s /usr/lib/python2.7/dist-packages/gdcmswig.py gdcmswig.py
-	$ ln -s /usr/lib/python2.7/dist-packages/_gdcmswig.so _gdcmswig.so
+	$ ln -s /usr/lib/python2.7/dist-packages/gdcm.py /virtalenv/path/python/site-packages/gdcm.py
+	$ ln -s /usr/lib/python2.7/dist-packages/gdcmswig.py /virtualenv/path/python/site-packages/gdcmswig.py
+	$ ln -s /usr/lib/python2.7/dist-packages/_gdcmswig.so /virtualenv/path/python/site-packages/_gdcmswig.so
 
 GDCM on Windows
 ~~~~~~~~~~~~~~~
@@ -110,12 +111,27 @@ Then you can copy and paste gdcm.py, gdcmswig.py, and _gdcmswig.so from gdcm/bin
 your python site-packages folder.
 
 
+Dicom3Tools (Validator)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+http://www.dclunie.com/dicom3tools/dciodvfy.html
+
+Debian:
+
+.. code:: bash
+
+    $ sudo apt-get install dicom3tools
+
+
 Quick How To
 ------------
 
 .. code:: python
 
     import mudicom
+    mudicom.Read("ex1.dcm")
+    mudicom.Image("ex1.dcm")
+    mudicom.Validate("ex1.dcm")
 
 Credits
 -------
