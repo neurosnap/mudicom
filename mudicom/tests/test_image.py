@@ -1,13 +1,21 @@
+import os
 import unittest
 import gdcm
-from mudicom import Read, Image
+import numpy
+
+from .. import Read, Image
 
 
 class TestImage(unittest.TestCase):
 
 	def setUp(self):
-		self.fnames = ("dicoms/ex1.dcm", "dicoms/ex2.dcm",)
+		nose_dir = os.path.join("mudicom", "tests", "dicoms")
+		self.fnames = (os.path.join(nose_dir, "ex1.dcm"), 
+			os.path.join(nose_dir, "ex2.dcm"),)
 
-
-if __name__ == '__main__':
-	unittest.main(verbosity=2)
+	def test_get_numpy(self):
+		for fname in self.fnames:
+			dcm = Image(fname)
+			gnp = dcm.get_numpy()
+			self.assertIsInstance(gnp, numpy.ndarray)
+			self.assertEqual(gnp.dtype, numpy.float)

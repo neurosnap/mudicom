@@ -1,18 +1,18 @@
+import os.path
 import unittest
 import gdcm
-from mudicom import Read
+from .. import Read
 
-# DICOM files to test
-fnames = ("dicoms/ex1.dcm", "dicoms/ex2.dcm",)
-types = ("hi there", 0, 123213, {}, [], (), True, False)
 
 class TestRead(unittest.TestCase):
 
 	def setUp(self):
-		pass
+		nose_dir = os.path.join("mudicom", "tests", "dicoms")
+		self.fnames = (os.path.join(nose_dir, "ex1.dcm"), 
+			os.path.join(nose_dir, "ex2.dcm"),)
 
 	def test_get_dataset(self):
-		for fname in fnames:
+		for fname in self.fnames:
 			reader = Read(fname)
 			ds = reader.get_dataset()
 			self.assertIsInstance(ds, list)
@@ -28,7 +28,7 @@ class TestRead(unittest.TestCase):
 				self.assertTrue("value_length" in element)
 
 	def test_map_VR(self):
-		reader = Read(fnames[0])
+		reader = Read(self.fnames[0])
 		self.assertEqual(reader.map_VR(VR="AE"), "Application Entity")
 		self.assertEqual(reader.map_VR("OB"), "Other Byte")
 		self.assertEqual(reader.map_VR("US"), "Unsigned Short")
@@ -40,7 +40,7 @@ class TestRead(unittest.TestCase):
 
 
 	def test_walk_dataset(self):
-		for fname in fnames:
+		for fname in self.fnames:
 			reader = Read(fname)
 
 			tags = list(reader.walk_dataset(lambda ds: ds.GetTag()))
@@ -64,15 +64,9 @@ class TestRead(unittest.TestCase):
 			for tag in tags:
 				self.assertTrue(tag)
 
-			#for flavor in types:
-			#	self.assertRaises(Exception, list(reader.walk_dataset), flavor)
-
 	def test_get_element(self):
-		for fname in fnames:
+		for fname in self.fnames:
 			reader = Read(fname)
 			self.assertIsInstance(reader.get_element(0x004, 0x1220), list)
 			self.assertIsInstance(reader.get_element(name="Modality"), list)
 			self.assertIsInstance(reader.get_element(VR="PN"), list)
-
-if __name__ == '__main__':
-	unittest.main(verbosity=2)
