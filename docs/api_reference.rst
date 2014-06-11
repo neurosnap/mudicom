@@ -3,6 +3,12 @@
 API Reference
 =============
 
+Mudicom
+-------
+
+.. automodule:: mudicom
+	:members:
+
 BaseDicom
 ---------
 

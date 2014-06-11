@@ -1,4 +1,3 @@
-""" Abstract class that all mudicom classes inherit. """
 import os
 import gdcm
 

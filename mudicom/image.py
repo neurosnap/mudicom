@@ -5,7 +5,7 @@ import gdcm
 
 
 class Image(object):
-    """ This class attempts to extract an image10
+    """ This class attempts to extract an image
     out of the DICOM file.
 
     :param fname: Location and filename of DICOM file.
@@ -52,12 +52,12 @@ class Image(object):
         result.shape = self.dimensions
         return result
 
-    def save_image_plt(self, fname, pixel_array, vmin=None, vmax=None,
+    def save_as_plt(self, fname, pixel_array, vmin=None, vmax=None,
         cmap=None, format=None, origin=None):
         """ This method saves the image from a numpy array using matplotlib
 
         :param fname: Location and name of the image file to be saved.
-        :param pixel_array: Numpy pixel array, i.e. :method:`get_numpy <mudicom.image.Image.get_numpy>` return value
+        :param pixel_array: Numpy pixel array, i.e. ``numpy()`` return value
         :param vmin: matplotlib vmin
         :param vmax: matplotlib vmax
         :param cmap: matplotlib color map
@@ -77,11 +77,11 @@ class Image(object):
         fig.savefig(fname, dpi=1, format=format)
         return True
 
-    def save_image_pil(self, fname, pixel_array):
+    def save_as_pil(self, fname, pixel_array):
         """  This method saves the image from a numpy array using Pillow (PIL fork)
 
         :param fname: Location and name of the image file to be saved.
-        :param pixel_array: Numpy pixel array, i.e. :method:`get_numpy <mudicom.image.Image.get_numpy>` return value
+        :param pixel_array: Numpy pixel array, i.e. ``numpy()`` return value
 
         This method will return True if successful
         """

@@ -3,7 +3,8 @@ import subprocess
 from .base import BaseDicom
 
 def load(fname):
-    """ Imports DICOM file into memory, returns a DICOM session class
+    """ Imports DICOM file into memory, 
+    returns a BaseDicom object.
 
     :param fname: Location and filename of DICOM file.
     """
