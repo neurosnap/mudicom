@@ -11,7 +11,6 @@ class TestValidate(unittest.TestCase):
 			os.path.join(nose_dir, "ex2.dcm"),)
 
 	def test_init(self):
-
 		dcm = Validate(self.fnames[0])
 		self.assertEqual(len(dcm.errors), 6)
 		self.assertEqual(len(dcm.warnings), 18)
