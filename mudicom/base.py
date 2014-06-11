@@ -1,11 +1,14 @@
-"""
-Abstract class that Image, Validator, and Reader inherit
-"""
+""" Abstract class that all mudicom classes inherit. """
 import os
 import gdcm
 
 class BaseDicom(object):
+    """ Abstract class that :class:`Read <mudicom.Read>`, 
+    :class:`Validate <mudicom.Validate>`, 
+    and :class:`Image <mudicom.Image>` inherit.
 
+    :param fname: Location and filename of DICOM file.
+    """
     def __init__(self, fname):
         self.fname = fname
         self.file_name, self.file_extension = os.path.splitext(fname)

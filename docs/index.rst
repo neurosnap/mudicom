@@ -38,9 +38,7 @@ Once dependencies have been installed, the package has the ability to read DICOM
 
    install
    tutorial
-   image
-   read
-   validate
+   api_reference
    contribute
    authors
 

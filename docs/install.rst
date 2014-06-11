@@ -12,16 +12,19 @@ There are three main classes in mudicom, each with different
 dependencies:
 
 Read
-- GDCM with python wrapper
+
+* GDCM with python wrapper
 
 Image
-- GDCM with python wrapper
-- numpy
-- Pillow (or matplotlib)
+
+* GDCM with python wrapper
+* numpy
+* Pillow (or matplotlib)
 
 Validate
-- GDCM with python wrapper
-- dicom3tools
+
+* GDCM with python wrapper
+* dicom3tools
 
 Linux (Ubuntu)
 --------------

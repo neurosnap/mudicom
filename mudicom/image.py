@@ -8,12 +8,16 @@ from .read import Read
 
 
 class Image(BaseDicom):
+    """ This class attempts to extract an image
+    out of the DICOM file.
 
+    :param fname: Location and filename of DICOM file.
+    """
     def __init__(self, fname):
         super(Image, self).__init__(fname)
 
     def get_numpy(self):
-        """ Extract image from DICOM file """
+        """ Grabs image data and converts it to a numpy array """
         # load GDCM's image reading functionality
         image_reader = self.gdcm.ImageReader()
         image_reader.SetFileName(self.fname)
@@ -24,7 +28,18 @@ class Image(BaseDicom):
 
     def save_image_plt(self, fname, pixel_array, vmin=None, vmax=None,
         cmap=None, format=None, origin=None):
-        """ Requires matplotlib """
+        """ This method saves the image from a numpy array using matplotlib
+
+        :param fname: Location and name of the image file to be saved.
+        :param pixel_array: Numpy pixel array, i.e. :method:`get_numpy <mudicom.image.Image.get_numpy>` return value
+        :param vmin: matplotlib vmin
+        :param vmax: matplotlib vmax
+        :param cmap: matplotlib color map
+        :param format: matplotlib format
+        :param origin: matplotlib origin
+
+        This method will return True if successful
+        """
         from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         from matplotlib.figure import Figure
         from pylab import cm
@@ -37,14 +52,23 @@ class Image(BaseDicom):
         return True
 
     def save_image_pil(self, fname, pixel_array):
-        """ Requires PIL """
+        """  This method saves the image from a numpy array using Pillow (PIL fork)
+
+        :param fname: Location and name of the image file to be saved.
+        :param pixel_array: Numpy pixel array, i.e. :method:`get_numpy <mudicom.image.Image.get_numpy>` return value
+
+        This method will return True if successful
+        """
         from PIL import Image as pillow
         pil_image = pillow.fromarray(pixel_array.astype('uint8'))
         pil_image.save(fname)
         return True
 
     def _gdcm_to_numpy(self, image):
-        """ Converts a GDCM image to a numpy array. """
+        """ Converts a GDCM image to a numpy array.
+
+        :param image: GDCM.ImageReader.GetImage()
+        """
         gdcm_typemap = {
             gdcm.PixelFormat.INT8:     numpy.int8,
             gdcm.PixelFormat.UINT8:    numpy.uint8,
