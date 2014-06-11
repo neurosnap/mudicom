@@ -1,6 +1,7 @@
 import os.path
 import unittest
 import gdcm
+
 from .. import Read
 
 

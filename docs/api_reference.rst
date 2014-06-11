@@ -26,3 +26,9 @@ Validate
 
 .. automodule:: mudicom.validate
 	:members:
+
+Anonymity
+---------
+
+.. automodule:: mudicom.anonymity
+	:members:

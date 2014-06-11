@@ -1,7 +1,7 @@
 import os
 import unittest
-import gdcm
 import numpy
+import gdcm
 
 from .. import Read, Image
 

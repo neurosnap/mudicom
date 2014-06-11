@@ -1,6 +1,7 @@
 import os.path
 import unittest
 import gdcm
+
 from .. import Validate
 
 class TestValidate(unittest.TestCase):
@@ -12,9 +13,9 @@ class TestValidate(unittest.TestCase):
 
 	def test_init(self):
 		dcm = Validate(self.fnames[0])
-		self.assertEqual(len(dcm.errors), 6)
-		self.assertEqual(len(dcm.warnings), 18)
+		self.assertEqual(len(dcm.get_errors()), 6)
+		self.assertEqual(len(dcm.get_warnings()), 18)
 
 		dcm = Validate(self.fnames[1])
-		self.assertEqual(len(dcm.errors), 7)
-		self.assertEqual(len(dcm.warnings), 18)
+		self.assertEqual(len(dcm.get_errors()), 7)
+		self.assertEqual(len(dcm.get_warnings()), 18)

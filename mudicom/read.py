@@ -3,37 +3,18 @@ from .base import BaseDicom
 
 
 class Read(BaseDicom):
+	""" This class creates a simple way to 
+	read DICOM elements from a DICOM file
 
+	:param fname: Location and filename of DICOM file.
+	"""
 	def __init__(self, fname):
 		super(Read, self).__init__(fname)
 		self.get_dataset()
 
-	def get_element(self, group=None, element=None, name=None, VR=None):
-		""" Finds a data element in the DICOM file """
-		results = self.dataset
-		if group is not None:
-			def find_group(data_element):
-				if (data_element['tag_group'] == group
-					or int(data_element['tag_group'], 16) == group):
-						return True
-				else:
-					return False
-			results = filter(find_group, results)
-
-		if element is not None:
-			def find_element(data_element):
-				if (data_element['tag_element'] == element
-					or int(data_element['tag_element'], 16) == element):
-						return True
-				else:
-					return False
-			results = filter(find_element, results)
-
-		return results
-
 	def get_dataset(self):
 		""" Returns array of dictionaries containing
-		all the data elements in the DICOM
+		all the data elements in the DICOM file.
 		"""
 		if hasattr(self, "dataset"):
 			return self.dataset
@@ -58,9 +39,31 @@ class Read(BaseDicom):
 		self.dataset = [data for data in self.walk_dataset(ds) if data is not None]
 		return self.dataset
 
+	def get_element(self, group=None, element=None, name=None, VR=None):
+		""" Searches for a data element in the DICOM file given
+		the filters supplied to this method.
+
+		:param group: Hex decimal for the group of a DICOM element e.g. 0x002
+		:param element: Hex decimal for the element value of a DICOM element e.g. 0x0010
+		:param name: Name of the DICOM element, e.g. "Modality"
+		:param VR: Value Representation of the DICOM element, e.g. "PN"
+		"""
+		results = self.dataset
+		if group is not None:
+			def find_group(data_element):
+				if (data_element['tag_group'] == group
+					or int(data_element['tag_group'], 16) == group):
+						return True
+				else:
+					return False
+			results = filter(find_group, results)
+
 	def walk_dataset(self, fn):
 		""" Loops through all data elements and
-		allows a function to interact with each data element """
+		allows a function to interact with each data element.  Uses
+		a generator to improve iteration.
+
+		:param fn: Function that interacts with each DICOM element """
 		if not hasattr(fn, "__call__"):
 			raise Exception("walk_dataset requires a function as its parameter")
 
@@ -70,8 +73,23 @@ class Read(BaseDicom):
 			data_element = iterator.next()
 			yield fn(data_element)
 
+		if element is not None:
+			def find_element(data_element):
+				if (data_element['tag_element'] == element
+					or int(data_element['tag_element'], 16) == element):
+						return True
+				else:
+					return False
+			results = filter(find_element, results)
+
+		return results
+
 	def map_VR(self, VR=None, description=None):
-		""" Value Representation (VR) lookup """
+		""" Value Representation (VR) <-> Description lookup.
+
+		:param VR: Takes the VR and returns its description
+		:param description: Take the description of a VR and returns the VR
+		"""
 		value_repr = {
 			"AE": "Application Entity",
 			"AS": "Age String",

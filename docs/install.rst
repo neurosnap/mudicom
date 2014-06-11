@@ -141,6 +141,10 @@ GDCM
 * Download the latest version of GDCM
 * Extract compressed file to desired location e.g. ~/gdcm.tar.bz2
 
+The trick with GDCM is that the build directory must be separated
+from the source directory.  -fPIC flags need to be set for C/C++
+and GDCM_WRAP_PYTHON must be turned on.
+
 .. code:: bash
 
 	$ mkdir gdcm-build

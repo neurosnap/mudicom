@@ -8,7 +8,9 @@ Welcome to mudicom's documentation!
 
 Contents:
 
-Mudicom is a python package that wraps around other tools that are widely used in the open-source community to read, write, and validate DICOM files.  There are two libraries that mudicom depends upon:
+Mudicom is a python package that wraps around other tools that are widely used 
+in the open-source community to read, extract images, and validate DICOM files.  
+There are two libraries that mudicom depends upon:
 
 *  GDCM_ (C++)
 *  dicom3tools_ (C++, command line tools)
@@ -29,9 +31,13 @@ Mudicom also depends upon 2-3 python packages:
 
 .. _PIL: http://pillow.readthedocs.org/en/latest/
 
-Either matplotlib or PIL is required for saving an image, user's preference.  I have found that matplotlib yields better quality images, but it's mainly because of color mapping.
+Either matplotlib or PIL is required for saving an image, user's preference.  
+I have found that matplotlib yields better quality images, 
+but it's mainly because of color mapping.
 
-Once dependencies have been installed, the package has the ability to read DICOM elements, manipulate DICOM image data using numpy, and validate DICOM elements to ensure the file conforms to the DICOM standard.
+Once dependencies have been installed, the package has the ability to read 
+DICOM elements, manipulate DICOM image data using numpy, and validate DICOM 
+elements to ensure the file conforms to the DICOM standard.
 
 .. toctree::
    :maxdepth: 2
@@ -39,6 +45,8 @@ Once dependencies have been installed, the package has the ability to read DICOM
    install
    tutorial
    api_reference
+   transfer_syntax
+   upcoming
    contribute
    authors
 
