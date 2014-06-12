@@ -10,9 +10,19 @@ Quick How To
 .. code:: python
 
     import mudicom
-    mudicom.Read("ex1.dcm")
-    mudicom.Image("ex1.dcm")
-    mudicom.Validate("ex1.dcm")
+    mu = mudicom.load("mudicom/tests/dicoms/ex1.dcm")
+    # returns array of data elements as dicts
+    mu.read()
+    # returns dict of errors and warnings for DICOM
+    mu.validate()
+    # creates image object
+    img = mu.image()
+    # returns numpy array
+    img.numpy()
+    # using Pillow, saves DICOM image
+    img.save_as_pil("ex1.jpg")
+    # using matplotlib, saves DICOM image
+    img.save_as_plt("ex1_2.jpg")
 
 Documentation
 -------------
