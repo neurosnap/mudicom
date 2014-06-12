@@ -42,17 +42,19 @@ class Image(object):
         if pixel_format in gdcm_typemap:
             self.data_type = gdcm_typemap[pixel_format]
         else:
-            raise KeyError(''.join(pixel_format, " is not a supported pixel format"))
+            raise KeyError(''.join(pixel_format, \
+                " is not a supported pixel format"))
 
         #dimension = image.GetDimension(0), image.GetDimension(1)
         self.dimensions = image.GetDimension(1), image.GetDimension(0)
         gdcm_array = image.GetBuffer()
         # use float for accurate scaling
-        result = numpy.frombuffer(gdcm_array, dtype=self.data_type).astype(float)
+        result = numpy.frombuffer(gdcm_array,
+            dtype=self.data_type).astype(float)
         result.shape = self.dimensions
         return result
 
-    def save_as_plt(self, fname, pixel_array, vmin=None, vmax=None,
+    def save_as_plt(self, fname, pixel_array=None, vmin=None, vmax=None,
         cmap=None, format=None, origin=None):
         """ This method saves the image from a numpy array using matplotlib
 
@@ -66,25 +68,35 @@ class Image(object):
 
         This method will return True if successful
         """
-        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+        from matplotlib.backends.backend_agg \
+        import FigureCanvasAgg as FigureCanvas
         from matplotlib.figure import Figure
         from pylab import cm
+
+        if pixel_array is None:
+            pixel_array = self.numpy()
+
         if cmap is None:
             cmap = cm.bone
         fig = Figure(figsize=pixel_array.shape[::-1], dpi=1, frameon=False)
         canvas = FigureCanvas(fig)
-        fig.figimage(pixel_array, cmap=cmap, vmin=vmin, vmax=vmax, origin=origin)
+        fig.figimage(pixel_array, cmap=cmap, vmin=vmin,
+            vmax=vmax, origin=origin)
         fig.savefig(fname, dpi=1, format=format)
         return True
 
-    def save_as_pil(self, fname, pixel_array):
-        """  This method saves the image from a numpy array using Pillow (PIL fork)
+    def save_as_pil(self, fname, pixel_array=None):
+        """  This method saves the image from a 
+        numpy array using Pillow (PIL fork)
 
         :param fname: Location and name of the image file to be saved.
         :param pixel_array: Numpy pixel array, i.e. ``numpy()`` return value
 
         This method will return True if successful
         """
+        if pixel_array is None:
+            pixel_array = self.numpy()
+
         from PIL import Image as pillow
         pil_image = pillow.fromarray(pixel_array.astype('uint8'))
         pil_image.save(fname)

@@ -59,7 +59,8 @@ class BaseDicom(object):
 
         :param fn: Function that interacts with each DICOM element """
         if not hasattr(fn, "__call__"):
-            raise Exception("walk_dataset requires a function as its parameter")
+            raise Exception("""walk_dataset requires a 
+                function as its parameter""")
 
         dataset = self.file.GetDataSet()
         iterator = dataset.GetDES().begin()
@@ -72,7 +73,8 @@ class BaseDicom(object):
         the filters supplied to this method.
 
         :param group: Hex decimal for the group of a DICOM element e.g. 0x002
-        :param element: Hex decimal for the element value of a DICOM element e.g. 0x0010
+        :param element: Hex decimal for the element value of a 
+        DICOM element e.g. 0x0010
         :param name: Name of the DICOM element, e.g. "Modality"
         :param VR: Value Representation of the DICOM element, e.g. "PN"
         """

@@ -33,9 +33,9 @@ def validate(fname):
             except ValueError:
                 return None, None
 
-    validation = { 
-        "errors": [], 
-        "warnings": [] 
+    validation = {
+        "errors": [],
+        "warnings": []
     }
 
     for line in _process():
