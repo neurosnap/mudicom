@@ -135,9 +135,21 @@ class Dicom(object):
         else:
             return results
 
-    def write(self):
+    def write(self, data_element, value=None, VR=None, VL=None):
         """ Write a value into the data element
+
+        data_element.SetValue()
+        data_element.SetVR()
+        data_element.SetVL()
         """
+        if value is not None:
+            pass
+
+        if VR is not None:
+            pass
+
+        if VL is not None:
+            pass
 
     def anonymize(self):
         """ Scrubs all patient information

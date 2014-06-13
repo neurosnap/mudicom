@@ -112,34 +112,51 @@ OR
 
 .. code:: bash
 
-	$ apt-get install cmake-curses-gui
-	$ apt-get install libpcre3 libpcre3-dev
+	$ apt-get install cmake
 
 SWIG
 ~~~~
 
+* PCRE is required for SWIG
+
+.. code:: bash
+
+	$ apt-get install libpcre3 libpcre3-dev
+
 * Download the latest version of SWIG
-* Extract compressed file e.g. swig-2.0.11
+* Extract compressed file e.g. swig-3.0.2
 
 .. code:: bash
 
-	$ sudo apt-get install swig2.0
+	$ wget http://prdownloads.sourceforge.net/swig/swig-3.0.2.tar.gz
+	$ tar -zxvf swig-3.0.2.tar.gz
 
-OR 
+* Install SWIG
 
 .. code:: bash
 
-	$ cd swig-2.0.11
+	$ cd swig-3.0.2
 	$ ./configure
 	$ make
 	$ make install
+
+OR
+
+.. code:: bash
+
+	$ sudo apt-get install swig3.0
 
 
 GDCM
 ~~~~
 
 * Download the latest version of GDCM
-* Extract compressed file to desired location e.g. ~/gdcm.tar.bz2
+* Extract compressed file to desired location e.g. ~/gdcm-2.4.2.tar.gz
+
+.. code:: bash
+
+	$ wget http://tcpdiag.dl.sourceforge.net/project/gdcm/gdcm%202.x/GDCM%202.4.2/gdcm-2.4.2.tar.gz
+	$ tar -zxvf gdcm-2.4.2.tar.gz
 
 The trick with GDCM is that the build directory must be separated
 from the source directory.  -fPIC flags need to be set for C/C++
@@ -151,8 +168,13 @@ and GDCM_WRAP_PYTHON must be turned on.
 	$ cd gdcm
 	$ rm CMakeCache.txt
 	$ cd ../gdcm-build
-	$ ccmake ../gdcm
+	$ cmake ../gdcm-2.4.2 -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC -DGDCM_WRAP_PYTHON=ON
 
+If using CCMAKE then do the following:
+
+.. code:: bash
+
+	$ ccmake ../gdcm-2.4.2
 
 * Screen will come up,
 * Press [T] to go to advanced mode
