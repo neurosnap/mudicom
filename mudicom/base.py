@@ -6,7 +6,7 @@ from .image import Image
 
 
 class Dicom(object):
-    """ Primary class that loads the DICOM file into 
+    """ Primary class that loads the DICOM file into
     memory and has properties that allows for reading
     the DICOM elements, saving an image, and
     validation
@@ -69,7 +69,7 @@ class Dicom(object):
 
         :param fn: Function that interacts with each DICOM element """
         if not hasattr(fn, "__call__"):
-            raise Exception("""walk_dataset requires a 
+            raise Exception("""walk_dataset requires a
                 function as its parameter""")
 
         dataset = self._dataset
@@ -89,7 +89,7 @@ class Dicom(object):
         the filters supplied to this method.
 
         :param group: Hex decimal for the group of a DICOM element e.g. 0x002
-        :param element: Hex decimal for the element value of a 
+        :param element: Hex decimal for the element value of a
         DICOM element e.g. 0x0010
         :param name: Name of the DICOM element, e.g. "Modality"
         :param VR: Value Representation of the DICOM element, e.g. "PN"

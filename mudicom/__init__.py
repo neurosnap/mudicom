@@ -3,7 +3,7 @@ import subprocess
 from .base import Dicom
 
 def load(fname):
-    """ Imports DICOM file into memory, 
+    """ Imports DICOM file into memory,
     returns a Dicom object.
 
     :param fname: Location and filename of DICOM file.
@@ -11,7 +11,7 @@ def load(fname):
     return Dicom(fname)
 
 def validate(fname):
-    """ This function uses dciodvfy to generate 
+    """ This function uses dciodvfy to generate
     a list of warnings and errors discovered within
     the DICOM file.
 

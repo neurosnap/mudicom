@@ -86,7 +86,7 @@ class Image(object):
         return True
 
     def save_as_pil(self, fname, pixel_array=None):
-        """  This method saves the image from a 
+        """  This method saves the image from a
         numpy array using Pillow (PIL fork)
 
         :param fname: Location and name of the image file to be saved.
