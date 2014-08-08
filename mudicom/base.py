@@ -5,6 +5,45 @@ import gdcm
 from .image import Image
 
 
+class DataElement(object):
+    """ Object representation of a Data Element """
+
+    def __init__(self, swig_element, name, value):
+        """ Executed on creation of Data Element
+
+        :param swig_element: GDCMs DataElement object
+        :param name: Name of DICOM Data Element
+        :param value: Value of DICOM Data Element """
+        self._swig_element = swig_element
+
+        self.name = name
+        self.value = value
+        self.VR = str(data_element.GetVR()).strip()
+        self.VL = str(data_element.GetVL()).strip()
+
+        tg = swig_element.GetTag()
+        self.tag = {
+            "group": hex(int(tg.GetGroup())),
+            "element": hex(int(tg.GetElement())),
+            "str": str(data_element.GetTag()).strip(),
+        }
+
+    def write(self, value=None, VR=None, VL=None):
+        """ Write a value into the data element
+
+        :param value: Value to be set for Data Element
+        :param VR: Value Representation to be set for Data Element
+        :param VL: Value Length to be set for Data Element
+        """
+        if value is not None:
+            self._swig_element.SetValue(value)
+
+        if VR is not None:
+            self._swig_element.SetVR(VR)
+
+        if VL is not None:
+            self._swig_element.SetVL(VL)
+
 class Dicom(object):
     """ Primary class that loads the DICOM file into
     memory and has properties that allows for reading
@@ -39,23 +78,10 @@ class Dicom(object):
         all the data elements in the DICOM file.
         """
         def ds(data_element):
-            tg = data_element.GetTag()
             value = self._str_filter.ToStringPair(data_element.GetTag())
             if value[1]:
-                value_repr = str(data_element.GetVR()).strip()
-                dict_element = {
-                    "name": value[0].strip(),
-                    "tag": {
-                        "group": hex(int(tg.GetGroup())),
-                        "element": hex(int(tg.GetElement())),
-                        "str": str(data_element.GetTag()).strip(),
-                    },
-                    "value": value[1].strip(),
-                    "VR": value_repr,
-                    "VL": str(data_element.GetVL()).strip()
-                }
+                return DataElement(data_element, value[0].strip(), value[1].strip())
 
-                return dict_element
         results = [data for data in self.walk(ds) if data is not None]
         if pretty:
             return self._pretty.pprint(results)
@@ -134,22 +160,6 @@ class Dicom(object):
             return self._pretty.pprint(results)
         else:
             return results
-
-    def write(self, data_element, value=None, VR=None, VL=None):
-        """ Write a value into the data element
-
-        data_element.SetValue()
-        data_element.SetVR()
-        data_element.SetVL()
-        """
-        if value is not None:
-            pass
-
-        if VR is not None:
-            pass
-
-        if VL is not None:
-            pass
 
     def anonymize(self):
         """ Scrubs all patient information
