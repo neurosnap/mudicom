@@ -18,31 +18,16 @@ class DataElement(object):
 
         self.name = name
         self.value = value
-        self.VR = str(data_element.GetVR()).strip()
-        self.VL = str(data_element.GetVL()).strip()
+        self.VR = str(swig_element.GetVR()).strip()
+        self.VL = str(swig_element.GetVL()).strip()
 
         tg = swig_element.GetTag()
         self.tag = {
             "group": hex(int(tg.GetGroup())),
             "element": hex(int(tg.GetElement())),
-            "str": str(data_element.GetTag()).strip(),
+            "str": str(swig_element.GetTag()).strip(),
         }
 
-    def write(self, value=None, VR=None, VL=None):
-        """ Write a value into the data element
-
-        :param value: Value to be set for Data Element
-        :param VR: Value Representation to be set for Data Element
-        :param VL: Value Length to be set for Data Element
-        """
-        if value is not None:
-            self._swig_element.SetValue(value)
-
-        if VR is not None:
-            self._swig_element.SetVR(VR)
-
-        if VL is not None:
-            self._swig_element.SetVL(VL)
 
 class Dicom(object):
     """ Primary class that loads the DICOM file into
@@ -124,7 +109,7 @@ class Dicom(object):
 
         if name is not None:
             def find_name(data_element):
-                if data_element['name'].lower() == name.lower():
+                if data_element.name.lower() == name.lower():
                     return True
                 else:
                     return False
@@ -132,8 +117,8 @@ class Dicom(object):
 
         if group is not None:
             def find_group(data_element):
-                if (data_element['tag']['group'] == group
-                    or int(data_element['tag']['group'], 16) == group):
+                if (data_element.tag['group'] == group
+                    or int(data_element.tag['group'], 16) == group):
                         return True
                 else:
                     return False
@@ -141,8 +126,8 @@ class Dicom(object):
 
         if element is not None:
             def find_element(data_element):
-                if (data_element['tag']['element'] == element
-                    or int(data_element['tag']['element'], 16) == element):
+                if (data_element.tag['element'] == element
+                    or int(data_element.tag['element'], 16) == element):
                         return True
                 else:
                     return False
@@ -150,7 +135,7 @@ class Dicom(object):
 
         if VR is not None:
             def find_VR(data_element):
-                if data_element['VR'].lower() == VR.lower():
+                if data_element.VR.lower() == VR.lower():
                     return True
                 else:
                     return False
@@ -160,14 +145,3 @@ class Dicom(object):
             return self._pretty.pprint(results)
         else:
             return results
-
-    def anonymize(self):
-        """ Scrubs all patient information
-        from the DICOM object in memory
-        """
-
-    def save(self, fname):
-        """ Saves DICOM file from memory
-
-        :param fname: Location and file of DICOM file to be saved.
-        """

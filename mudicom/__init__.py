@@ -90,7 +90,7 @@ def lookup_VR(VR=None, description=None):
                 return key
         raise Exception("Description not found in map")
     else:
-        raise Exception("Either VR or description required to map_VR")
+        raise Exception("Either VR or description required to map VR")
 
 def lookup_transfer_syntax(UID=None, description=None):
     """ Transfer Syntax UID <-> Description lookup.
