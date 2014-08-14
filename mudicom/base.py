@@ -32,8 +32,7 @@ class DataElement(object):
 class Dicom(object):
     """ Primary class that loads the DICOM file into
     memory and has properties that allows for reading
-    the DICOM elements, saving an image, and
-    validation
+    the DICOM elements, extracting images
 
     :param fname: Location and filename of DICOM file.
     """
