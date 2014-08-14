@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+v0.0.5, 08-14-2014
+------------------
+
+Updated MANIFEST.in to include .rst, I'm a dumbass
+
+v0.0.4, 08-14-2014
+------------------
+
+Removed LICENSE.rst from setup.py
+
+v0.0.3, 08-14-2014
+------------------
+
+PIP cannot read LICENSE.rst for some reason
+
 v0.0.3, 08-14-2014
 ------------------
 
