@@ -4,7 +4,8 @@ mudicom
 
 A python package that validates, reads, and extracts images from a DICOM file.
 
-This python package requires GDCM with the python wrapper
+This python package requires GDCM with the python wrapper for reading the 
+dicom file and dicom3tools for dicom validation.
 
 Quick How To
 ------------
@@ -29,7 +30,8 @@ Quick How To
 Documentation
 -------------
 
-Full documentation is available at https://github.com/neurosnap/mudicom
+Full documentation is available at 
+https://github.com/neurosnap/mudicom/tree/master/docs
 
 Requirements
 ------------

@@ -3,7 +3,7 @@ Install
 =======
 
 This is a step-by-step guide on how to properly install
-mudicom.  
+mudicom.
 
 Dependencies
 ------------
@@ -34,7 +34,7 @@ Install GDCM with Python
 
 .. code:: bash
 
-	$ apt-get install python-gdcm 
+	$ apt-get install python-gdcm
 
 By default, this apt repository installs python into:
 /usr/lib/python2.7/dist-packages
@@ -48,9 +48,18 @@ toolchain:
 
 .. _dicom3tools: http://www.dclunie.com/dicom3tools/dciodvfy.html
 
+Debian (Ubuntu)
+
 .. code:: bash
 
 	$ apt-get install dicom3tools
+
+Max OS X
+
+* Download http://www.dclunie.com/dicom3tools/workinprogress/macexe/
+* Unzip
+* Move dciodvfy to /usr/local/bin/
+
 
 Virtualenv (optional)
 ~~~~~~~~~~~~~~~~~~~~~
@@ -108,11 +117,17 @@ CMAKE
 	$ make
 	$ make install
 
-OR
+Debian (Ubuntu)
 
 .. code:: bash
 
 	$ apt-get install cmake
+
+Max OS X
+
+.. code:: bash
+
+	$ brew install cmake
 
 SWIG
 ~~~~
@@ -140,12 +155,17 @@ SWIG
 	$ make
 	$ make install
 
-OR
+Debian (Ubuntu)
 
 .. code:: bash
 
 	$ sudo apt-get install swig3.0
 
+Max OS X
+
+.. code:: bash
+
+	$ brew install cmake
 
 GDCM
 ~~~~
@@ -188,6 +208,19 @@ If using CCMAKE then do the following:
 
 	$ make
 	$ sudo make install
+
+Mac OS X
+--------
+
+GDCM
+~~~~
+
+The process is essentially the same as building from source.
+Make sure you can build c++ applications
+
+.. code:: bash
+
+	$ brew install llvm --with-clang -stdlib=libc++
 
 Windows
 -------
