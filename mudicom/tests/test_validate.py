@@ -8,7 +8,7 @@ import mudicom
 class TestValidate(unittest.TestCase):
 
 	def setUp(self):
-		nose_dir = os.path.join("mudicom", "tests", "dicoms")
+		nose_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "dicoms")
 		self.fnames = (os.path.join(nose_dir, "ex1.dcm"),
 						os.path.join(nose_dir, "ex2.dcm"),)
 
