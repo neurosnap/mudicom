@@ -14,7 +14,7 @@ class TestRead(unittest.TestCase):
 
     def test_get_dataset(self):
         for fname in self.fnames:
-            print fname
+            print(fname)
             mu = mudicom.load(fname)
             ds = mu.read()
             self.assertIsInstance(ds, list)
