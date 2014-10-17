@@ -1,6 +1,6 @@
 
-mudicom - 0.0.7
-===============
+mudicom
+=======
 
 A light-weight python package that validates, reads, and extracts images from a DICOM file.
 
