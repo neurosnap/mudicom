@@ -17,7 +17,7 @@ setup(
 	description='Read and extract images from a DICOM file using GDCM',
     long_description=read('README.rst') + '\n\n' + read('CHANGES.rst'),
     tests_require=['nosetest'],
-    install_requires=['numpy'],
+    install_requires=['numpy','pillow'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
