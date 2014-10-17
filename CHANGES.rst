@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+v0.0.7, 10-16-2014
+------------------
+
+- Fixed python 3 issue with GDCM image encoding
+
 v0.0.6, 09-08-2014
 ------------------
 
