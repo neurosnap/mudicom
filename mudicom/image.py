@@ -1,8 +1,8 @@
 from __future__ import division
 import os.path
+import sys
 import numpy
 import gdcm
-
 
 class Image(object):
     """ This class attempts to extract an image
@@ -48,6 +48,11 @@ class Image(object):
         #dimension = image.GetDimension(0), image.GetDimension(1)
         self.dimensions = image.GetDimension(1), image.GetDimension(0)
         gdcm_array = image.GetBuffer()
+
+        # GDCM returns char* as type str. This converts it to type bytes
+        if sys.version_info >= (3, 0):
+            gdcm_array = gdcm_array.encode(sys.getfilesystemencoding(), "surrogateescape")
+
         # use float for accurate scaling
         result = numpy.frombuffer(gdcm_array,
             dtype=self.data_type).astype(float)
