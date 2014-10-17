@@ -5,7 +5,21 @@ from .image import Image
 
 
 class DataElement(object):
-    """ Object representation of a Data Element """
+    """ Object representation of a Data Element
+
+    :param swig_element: GDCMs DataElement SWIG object
+    :param name: Name of DICOM data element
+    :param value: Value of DICOM data element
+
+    DataElement Properties:
+        name: Name of DICOM data element
+        Value: Value of data element
+        VR: Value Representation of data element
+        VL: Value Length of data element
+        tag: Dictionary of data element tag information
+        tag['group']: Tag group of data element
+        tag['element']: Tag element of data element
+        tag['str']: String representation of data element tag """
 
     def __init__(self, swig_element, name, value):
         """ Executed on creation of Data Element

@@ -2,22 +2,22 @@
 Transfer Syntax
 ===============
 
-    A transfer syntax is a set of encoding rules that allow Application 
-    Entities to unambiguously negotiate the encoding techniques 
-    (e.g., Data Element structure, byte ordering, compression) they are 
-    able to support, thereby allowing these Application Entities to 
+    A transfer syntax is a set of encoding rules that allow Application
+    Entities to unambiguously negotiate the encoding techniques
+    (e.g., Data Element structure, byte ordering, compression) they are
+    able to support, thereby allowing these Application Entities to
     communicate.
 
-    -- `DICOM Standard 3.10`_ 
-    
+    -- `DICOM Standard 3.10`_
+
     .. _`DICOM Standard 3.10`: http://www.dabsoft.ch/dicom/5/3.10/
 
-The Transfer Syntax UID is the unique identifier used as a tag in the DICOM 
-standard to determine the type of encoding principles used for any given 
-DICOM file. The Transfer Syntax UID is in the file DICOM Tag 
-field (0002,0010). 
+The Transfer Syntax UID is the unique identifier used as a tag in the DICOM
+standard to determine the type of encoding principles used for any given
+DICOM file. The Transfer Syntax UID is in the file DICOM Tag
+field (0002,0010).
 
-The following list are the currently supported transfer syntaxes 
+The following list are the currently supported transfer syntaxes
 for mudicom:
 
 +------------------------+----------------------------------------------+

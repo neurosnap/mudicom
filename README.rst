@@ -1,16 +1,16 @@
 
-mudicom
-========
+mudicom - 0.0.7
+===============
 
-A python package that validates, reads, and extracts images from a DICOM file.
+A light-weight python package that validates, reads, and extracts images from a DICOM file.
 
 Requirements
 ------------
 
 Base:
 
-- Python <= 2.7
-- GDCM with python wrapper (https://github.com/neurosnap/mudicom/blob/master/docs/install.rst)
+- Python <= 2.7 (Should work with Python 3 but I haven't tested it)
+- GDCM with python wrapper (http://mudicom.dcmdb.org/install.html)
 
 Validator:
 
@@ -55,7 +55,9 @@ Roadmap
 -------
 
 - Extract multiple images from one single DICOM file
-- Publish documentation online
+- Detect corrupted DICOM files
+- Ability to anonymize DICOM file
+- Ability to set data elements
 
 Credits
 -------

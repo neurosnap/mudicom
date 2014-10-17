@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+v0.0.8, 10-17-2014
+------------------
+
+- Fixed another python 3 issue with unit tests
+- Added guide on basic usage
+- Added str and repr properties to primary classes
+- Ramped up documentation at http://mudicom.dcmdb.org/
+
 v0.0.7, 10-16-2014
 ------------------
 
