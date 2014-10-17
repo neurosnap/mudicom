@@ -154,10 +154,15 @@ This returns a generator to interact with
 
 .. code:: python
 
-    [data for data in mu.walk(is_empty)]
     <generator object walk at 0x10bf4b9b0>
 
-Create a list that has touched every GDCM DataElement in the DICOM file.
+To use the generator
+
+.. code:: python
+
+    [data for data in mu.walk(is_empty)]
+
+This creates a list that has touched every GDCM DataElement in the DICOM file.
 
 .. code:: python
 
