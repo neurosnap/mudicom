@@ -13,6 +13,12 @@ class Image(object):
     def __init__(self, fname):
         self.fname = fname
 
+    def __repr__(self):
+        return "<MudicomImage {0}>".format(self.fname)
+
+    def __str__(self):
+        return self.fname
+
     def numpy(self):
         """ Grabs image data and converts it to a numpy array """
         # load GDCM's image reading functionality

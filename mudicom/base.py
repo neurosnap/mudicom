@@ -1,5 +1,4 @@
 import os
-import pprint
 import gdcm
 
 from .image import Image
@@ -28,6 +27,12 @@ class DataElement(object):
             "str": str(swig_element.GetTag()).strip(),
         }
 
+    def __repr__(self):
+        return "<DataElement {0} {1}>".format(self.name, self.tag['str'])
+
+    def __str__(self):
+        return self.name
+
 
 class Dicom(object):
     """ Primary class that loads the DICOM file into
@@ -51,13 +56,17 @@ class Dicom(object):
         self._str_filter = gdcm.StringFilter()
         self._str_filter.SetFile(file_mem)
 
-        self._pretty = pprint.PrettyPrinter(indent=4)
+    def __repr__(self):
+        return "<Dicom {0}>".format(self.fname)
+
+    def __str__(self):
+        return str(self.fname)
 
     def image(self):
         """ Read the loaded DICOM image data """
         return Image(self.fname)
 
-    def read(self, pretty=False):
+    def read(self):
         """ Returns array of dictionaries containing
         all the data elements in the DICOM file.
         """
@@ -67,10 +76,7 @@ class Dicom(object):
                 return DataElement(data_element, value[0].strip(), value[1].strip())
 
         results = [data for data in self.walk(ds) if data is not None]
-        if pretty:
-            return self._pretty.pprint(results)
-        else:
-            return results
+        return results
 
     def walk(self, fn):
         """ Loops through all data elements and
@@ -94,7 +100,7 @@ class Dicom(object):
             data_element = iterator.next()
             yield fn(data_element)
 
-    def find(self, group=None, element=None, name=None, VR=None, pretty=False):
+    def find(self, group=None, element=None, name=None, VR=None):
         """ Searches for data elements in the DICOM file given
         the filters supplied to this method.
 
@@ -140,7 +146,4 @@ class Dicom(object):
                     return False
             results = filter(find_VR, results)
 
-        if pretty:
-            return self._pretty.pprint(results)
-        else:
-            return results
+        return results
