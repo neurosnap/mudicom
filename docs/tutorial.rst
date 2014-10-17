@@ -41,6 +41,7 @@ Searching for DICOM data elements
 ---------------------------------
 
 Find data element by name
+`````````````````````````
 
 .. code:: python
 
@@ -56,6 +57,7 @@ The response will be a list of DataElements, example:
     [<DataElement Transfer Syntax UID (0002,0010)>]
 
 Find data elements by tag group
+```````````````````````````````
 
 .. code:: python
 
@@ -80,6 +82,7 @@ You can also search for the data element by the integer value of the tag group
     mu.find(group=32) # equivalent (0x020)
 
 Find data elements by tag element
+`````````````````````````````````
 
 .. code:: python
 
@@ -113,6 +116,7 @@ to return one DataElement, example:
     [<DataElement Transfer Syntax UID (0002,0010)>]
 
 Find data elements by Value Representation (VR)
+```````````````````````````````````````````````
 
 .. code:: python
 
@@ -197,12 +201,14 @@ Get numpy array of DICOM image
 ------------------------------
 
 Prepare the DICOM image class
+`````````````````````````````
 
 .. code:: python
 
     img = mu.image()
 
-Grab DICOM numpy array
+Get DICOM numpy array
+`````````````````````
 
 .. code:: python
 
