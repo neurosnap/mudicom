@@ -49,8 +49,7 @@ Quick How To
 Documentation
 -------------
 
-Full documentation is available at
-https://github.com/neurosnap/mudicom/tree/master/docs (temporary)
+Full documentation is available at http://mudicom.dcmdb.org/
 
 Roadmap
 -------

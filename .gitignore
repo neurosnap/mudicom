@@ -1,3 +1,4 @@
+conf/*
 _build
 *.py[cod]
 *.egg
