@@ -2,8 +2,7 @@
 Tutorial
 ========
 
-The goal of mudicom is to be able to interact with DICOM files using GDCM
-in a python fasion.
+The goal of mudicom is in a pythonic way interact with GDCM C++ DICOM library.
 
 Import library
 --------------
@@ -25,7 +24,7 @@ Getting list of data elements
 
 Here you should see a list of DataElements, example:
 
-..code:: python
+.. code:: python
 
     [<DataElement Generic Group Length (0008,0000)>,
      <DataElement Image Type (0008,0008)>,
