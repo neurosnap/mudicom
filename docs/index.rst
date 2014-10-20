@@ -8,8 +8,10 @@ Welcome to mudicom's documentation!
 
 Contents:
 
-Mudicom is a light-weight python package that wraps around other tools that are widely used
-in the open-source community to read, extract images, and validate DICOM files.
+Mudicom is a light-weight python package that wraps around other tools that
+are widely used in the open-source community to read, extract images,
+validate, and anonymize DICOM files.
+
 There are two critical libraries that mudicom depends upon:
 
 *  GDCM_ (C++)

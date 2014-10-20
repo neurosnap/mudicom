@@ -8,13 +8,13 @@ def read(fname):
 
 setup(
 	name='mudicom',
-	version='0.0.8',
+	version='0.0.9',
 	author='Eric Bower',
 	author_email='neurosnap@gmail.com',
 	packages=find_packages(),
 	url='https://github.com/neurosnap/mudicom',
 	license=read('LICENSE.rst'),
-	description='Read, validate, and extract images from a DICOM file using GDCM',
+	description='Read, validate, anonymize, and extract images from a DICOM file using GDCM',
     long_description=read('README.rst') + '\n\n' + read('CHANGES.rst'),
     tests_require=['nosetest'],
     install_requires=['numpy'],

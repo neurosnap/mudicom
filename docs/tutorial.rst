@@ -284,6 +284,23 @@ Returns dictionary conntaining errors and warnings, example:
                      'Value is zero for value 1 of attribute <Imaging Frequency>']
     }
 
+Anonymize DICOM File
+--------------------
+
+Work in progress!
+
+Use at your own risk!  I have not fully tested this functionality,
+but the goal is for it to be a basic DICOM anonymizer based on the 2014
+DICOM Standard, part 15, found here: http://medical.nema.org/medical/dicom/current/output/html/part15.html#table_E.1-1
+
+As of right now it does not clear private data elements, image overlays,
+or "burned-in" patient information on the DICOM image.
+
+.. code:: python
+
+    mu.anonymize()
+    mu.save_as("anonymized.dcm")
+
 Look up text of Value Representation
 ------------------------------------
 

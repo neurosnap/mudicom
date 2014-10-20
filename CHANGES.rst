@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+v0.0.9, 10-19-2014
+------------------
+
+- Added basic profile DICOM anonymization
+- Added ability to save changes to DICOM file, "save as"
+
 v0.0.8, 10-17-2014
 ------------------
 

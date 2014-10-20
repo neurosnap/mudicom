@@ -1,8 +1,10 @@
 import os
+import json
 import gdcm
 
 from .image import Image
 
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 class DataElement(object):
     """ Object representation of a Data Element
@@ -64,11 +66,11 @@ class Dicom(object):
         if not reader.Read():
             raise Exception("Not a valid DICOM file")
 
-        file_mem = reader.GetFile()
-        self._header = file_mem.GetHeader()
-        self._dataset = file_mem.GetDataSet()
+        self._file = reader.GetFile()
+        self._header = self._file.GetHeader()
+        self._dataset = self._file.GetDataSet()
         self._str_filter = gdcm.StringFilter()
-        self._str_filter.SetFile(file_mem)
+        self._str_filter.SetFile(self._file)
 
     def __repr__(self):
         return "<Dicom {0}>".format(self.fname)
@@ -161,3 +163,57 @@ class Dicom(object):
             results = filter(find_VR, results)
 
         return results
+
+    def anonymize(self):
+        """ According to PS 3.15-2008, basic application level
+        De-Indentification of a DICOM file requires replacing the
+        values of a set of data elements"""
+
+        self._anon_obj = gdcm.Anonymizer()
+        self._anon_obj.SetFile(self._file)
+        self._anon_obj.RemoveGroupLength()
+
+        #with open(os.path.join(BASE_DIR, "json/action_codes.json"), "r") as fp:
+        #    action_codes = json.load(fp)
+
+        with open(os.path.join(BASE_DIR, "json/deidentify.json"), "r") as fp:
+            tags = json.load(fp)
+
+        for tag in tags:
+            cur_tag = tag['Tag'].replace("(", "")
+            cur_tag = cur_tag.replace(")", "")
+            name = tag["Attribute Name"].replace(" ", "").encode("utf8")
+            group, element = cur_tag.split(",", 1)
+
+            # TODO expand this 50xx, 60xx, gggg, eeee
+            if ("xx" not in group
+                and "gggg" not in group
+                and "eeee" not in group):
+                group = int(group, 16)
+                element = int(element, 16)
+                if self.find(group=group, element=element):
+                    self._anon_obj.Replace(
+                        gdcm.Tag(group, element), "Anon" + name)
+
+        return self._anon_obj
+
+    def save_as(self, fname, obj=None):
+        """ Save DICOM file given a GDCM DICOM object.
+        Examples of a GDCM DICOM object:
+        * gdcm.Writer()
+        * gdcm.Reader()
+        * gdcm.Anonymizer()
+
+        :param fname: DICOM file name to be saved
+        :param obj: DICOM object to be saved, if None, Anonymizer() is used
+        """
+        writer = gdcm.Writer()
+        writer.SetFileName(fname)
+        if obj is None and self._anon_obj:
+            obj = self._anon_obj
+        else:
+            raise Exception("Need DICOM object, e.g. obj=gdcm.Anonymizer()")
+        writer.SetFile(obj.GetFile())
+        if not writer.Write():
+            raise Exception("Could not save DICOM file")
+        return True
