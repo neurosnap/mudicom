@@ -36,6 +36,11 @@ Quick How To
     # returns dict of errors and warnings for DICOM
     mu.validate()
 
+    # basic anonymization
+    mu.anonymize()
+    # save anonymization
+    mu.save_as("dicom.dcm")
+
     # creates image object
     img = mu.image()
     # returns numpy array
