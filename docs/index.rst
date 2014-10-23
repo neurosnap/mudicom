@@ -49,6 +49,7 @@ elements to ensure the file conforms to the DICOM standard.
    tutorial
    api_reference
    transfer_syntax
+   changes
    upcoming
    contribute
    authors
