@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+v0.1.0, 1-11-2015
+------------------
+
+- Re-organized package modules
+- Added \__version\__ variable
+- Added and updated unit tests
+- mudicom.load() now accepts kwargs
+- Dicom() has new method: validate()
+- Dicom() has new attributes: errors, warnings, image
+- mudicom.base.Dicom.image is now an attribute, breaks backwards compat
+- mudicom.image.Image.numpy is now an attribute, breaks backwards compat
+- Added mudicom.exceptions module with InvalidDicom exception
+
 v0.0.9, 10-19-2014
 ------------------
 

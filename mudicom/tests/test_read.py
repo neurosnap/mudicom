@@ -14,7 +14,6 @@ class TestRead(unittest.TestCase):
 
     def test_get_dataset(self):
         for fname in self.fnames:
-            print(fname)
             mu = mudicom.load(fname)
             ds = mu.read()
             self.assertIsInstance(ds, list)
@@ -31,15 +30,44 @@ class TestRead(unittest.TestCase):
                 self.assertTrue("str" in element.tag)
 
     def test_map_VR(self):
+        self.assertEqual(mudicom.lookup.VR(VR="AE"), "Application Entity")
+        self.assertEqual(mudicom.lookup.VR("OB"), "Other Byte")
+        self.assertEqual(mudicom.lookup.VR("US"), "Unsigned Short")
+        self.assertEqual(mudicom.lookup.VR(description="Time"), "TM")
+        self.assertEqual(mudicom.lookup.VR(description="Unknown"), "UN")
+        self.assertEqual(mudicom.lookup.VR(description="Sequence of Items"), "SQ")
+        self.assertEqual(None, mudicom.lookup.VR("ZZ"))
+        self.assertEqual(None, mudicom.lookup.VR("Hi there"))
+
+    def test_map_VR_deprecated(self):
         self.assertEqual(mudicom.lookup_VR(VR="AE"), "Application Entity")
         self.assertEqual(mudicom.lookup_VR("OB"), "Other Byte")
         self.assertEqual(mudicom.lookup_VR("US"), "Unsigned Short")
         self.assertEqual(mudicom.lookup_VR(description="Time"), "TM")
         self.assertEqual(mudicom.lookup_VR(description="Unknown"), "UN")
         self.assertEqual(mudicom.lookup_VR(description="Sequence of Items"), "SQ")
-        self.assertRaises(Exception, mudicom.lookup_VR, "ZZ")
-        self.assertRaises(Exception, mudicom.lookup_VR, None, "Hi there")
+        self.assertEqual(None, mudicom.lookup_VR("ZZ"))
+        self.assertEqual(None, mudicom.lookup_VR("Hi there"))
 
+    def test_map_ts(self):
+        self.assertEqual(mudicom.lookup.transfer_syntax(UID="1.2.840.10008.1.2"), "Implicit VR Endian: Default Transfer Syntax for DICOM")
+        self.assertEqual(mudicom.lookup.transfer_syntax("1.2.840.10008.1.2.4.80"), "JPEG-LS Lossless Image Compression")
+        self.assertEqual(mudicom.lookup.transfer_syntax("1.2.840.10008.1.2.4.91"), "JPEG 2000 Image Compression")
+        self.assertEqual(mudicom.lookup.transfer_syntax(description="JPIP Referenced"), "1.2.840.10008.1.2.4.94")
+        self.assertEqual(mudicom.lookup.transfer_syntax(description="RFC 2557 MIME Encapsulation"), "1.2.840.10008.1.2.6.1")
+        self.assertEqual(mudicom.lookup.transfer_syntax(description="Deflated Explicit VR Big Endian"), "1.2.840.10008.1.2.1.99")
+        self.assertEqual(None, mudicom.lookup.transfer_syntax("0.0.0.0"))
+        self.assertEqual(None, mudicom.lookup.transfer_syntax("Hi there"))
+
+    def test_map_ts_deprecated(self):
+        self.assertEqual(mudicom.lookup_transfer_syntax(UID="1.2.840.10008.1.2"), "Implicit VR Endian: Default Transfer Syntax for DICOM")
+        self.assertEqual(mudicom.lookup_transfer_syntax("1.2.840.10008.1.2.4.80"), "JPEG-LS Lossless Image Compression")
+        self.assertEqual(mudicom.lookup_transfer_syntax("1.2.840.10008.1.2.4.91"), "JPEG 2000 Image Compression")
+        self.assertEqual(mudicom.lookup_transfer_syntax(description="JPIP Referenced"), "1.2.840.10008.1.2.4.94")
+        self.assertEqual(mudicom.lookup_transfer_syntax(description="RFC 2557 MIME Encapsulation"), "1.2.840.10008.1.2.6.1")
+        self.assertEqual(mudicom.lookup_transfer_syntax(description="Deflated Explicit VR Big Endian"), "1.2.840.10008.1.2.1.99")
+        self.assertEqual(None, mudicom.lookup_transfer_syntax("0.0.0.0"))
+        self.assertEqual(None, mudicom.lookup_transfer_syntax("Hi there"))
 
     def test_walk_dataset(self):
         for fname in self.fnames:

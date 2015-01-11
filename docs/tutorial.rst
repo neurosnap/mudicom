@@ -284,6 +284,25 @@ Returns dictionary conntaining errors and warnings, example:
                      'Value is zero for value 1 of attribute <Imaging Frequency>']
     }
 
+Or you can use the validate() function within the Dicom class
+
+.. code:: python
+
+    mu = mudicom.load("dicom.dcm")
+    mu.validate()
+
+Grab the errors
+
+.. code:: python
+
+    mu.errors
+
+Grab the warnings
+
+.. code:: python
+
+    mu.warnings
+
 Anonymize DICOM File
 --------------------
 
@@ -304,9 +323,19 @@ or "burned-in" patient information on the DICOM image.
 Look up text of Value Representation
 ------------------------------------
 
-WIP
+.. code:: python
+
+    from mudicom import lookup
+
+    lookup.VR("TM")
+    >>> 'Time'
 
 Look up value of Transfer Syntax UID
 ------------------------------------
 
-WIP
+.. code:: python
+
+    from mudicom import lookup
+
+    lookup.transfer_syntax("1.2.840.10008.1.2")
+    >>> 'Implicit VR Endian: Default Transfer Syntax for DICOM'

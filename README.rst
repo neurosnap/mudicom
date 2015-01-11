@@ -42,9 +42,9 @@ Quick How To
     mu.save_as("dicom.dcm")
 
     # creates image object
-    img = mu.image()
+    img = mu.image # before v0.1.0 this was mu.image()
     # returns numpy array
-    img.numpy()
+    img.numpy # before v0.1.0 this was mu.numpy()
 
     # using Pillow, saves DICOM image
     img.save_as_pil("ex1.jpg")

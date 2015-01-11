@@ -16,7 +16,7 @@ class TestImage(unittest.TestCase):
 	def test_get_numpy(self):
 		for fname in self.fnames:
 			mu = mudicom.load(fname)
-			img = mu.image()
-			gnp = img.numpy()
+			img = mu.image
+			gnp = img.numpy
 			self.assertIsInstance(gnp, numpy.ndarray)
 			self.assertEqual(gnp.dtype, numpy.float)

@@ -1,12 +1,18 @@
-from __future__ import division
+# -*- coding: utf-8 -*-
+"""
+    mudicom.image
+    ~~~~~~~~~~~~~
+
+    Primary image module that converts DICOM pixel data into a numpy array
+    as well as saving the image using Matplotlib or Pillow.
+"""
 import os.path
 import sys
 import numpy
 import gdcm
 
 class Image(object):
-    """ This class attempts to extract an image
-    out of the DICOM file.
+    """ This class attempts to extract an image out of the DICOM file.
 
     :param fname: Location and filename of DICOM file.
     """
@@ -17,15 +23,16 @@ class Image(object):
         return "<MudicomImage {0}>".format(self.fname)
 
     def __str__(self):
-        return self.fname
+        return str(self.fname)
 
+    @property
     def numpy(self):
         """ Grabs image data and converts it to a numpy array """
         # load GDCM's image reading functionality
         image_reader = gdcm.ImageReader()
         image_reader.SetFileName(self.fname)
         if not image_reader.Read():
-            raise Exception("Could not read DICOM image")
+            raise IOError("Could not read DICOM image")
         pixel_array = self._gdcm_to_numpy(image_reader.GetImage())
         return pixel_array
 
@@ -97,8 +104,8 @@ class Image(object):
         return True
 
     def save_as_pil(self, fname, pixel_array=None):
-        """  This method saves the image from a
-        numpy array using Pillow (PIL fork)
+        """  This method saves the image from a numpy array using Pillow
+        (PIL fork)
 
         :param fname: Location and name of the image file to be saved.
         :param pixel_array: Numpy pixel array, i.e. ``numpy()`` return value
