@@ -7,7 +7,7 @@
     from a DICOM file.
 
     :copyright: (c) 2015 by Eric Bower
-    :license: MIT, see LICENSE.rst for more information.
+    :license: MIT, see :LICENSE.rst: for more information.
 """
 
 __version__ = '0.1.0'
