@@ -8,9 +8,16 @@ Welcome to mudicom's documentation!
 
 Contents:
 
-Mudicom is a light-weight python package that wraps around other tools that
+Mudicom is a python package that wraps around other tools that
 are widely used in the open-source community to read, extract images,
 validate, and anonymize DICOM files.
+
+.. code:: bash
+
+    pip install mudicom
+
+Github: https://github.com/neurosnap/mudicom
+pypi: https://pypi.python.org/pypi/mudicom
 
 There are two critical libraries that mudicom depends upon:
 
