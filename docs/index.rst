@@ -17,6 +17,7 @@ validate, and anonymize DICOM files.
     pip install mudicom
 
 Github: https://github.com/neurosnap/mudicom
+
 pypi: https://pypi.python.org/pypi/mudicom
 
 There are two critical libraries that mudicom depends upon:
