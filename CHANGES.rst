@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+v0.1.1, 05-07-2015
+------------------
+
+- Support for animations as 3-D pixel arrays
+
 v0.1.0, 1-11-2015
 ------------------
 
