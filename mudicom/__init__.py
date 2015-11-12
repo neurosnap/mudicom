@@ -10,7 +10,7 @@
     :license: MIT, see :LICENSE.rst: for more information.
 """
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 from .base import Dicom
 from . import lookup

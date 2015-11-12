@@ -96,7 +96,7 @@ class Image(object):
         from pylab import cm
 
         if pixel_array is None:
-            pixel_array = self.numpy()
+            pixel_array = self.numpy
 
         if cmap is None:
             cmap = cm.bone
@@ -117,7 +117,7 @@ class Image(object):
         This method will return True if successful
         """
         if pixel_array is None:
-            pixel_array = self.numpy()
+            pixel_array = self.numpy
 
         from PIL import Image as pillow
         pil_image = pillow.fromarray(pixel_array.astype('uint8'))

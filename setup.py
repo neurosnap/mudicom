@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
 	name='mudicom',
-	version='0.1.1',
+	version='0.1.2',
 	author='Eric Bower',
 	author_email='neurosnap@gmail.com',
 	packages=find_packages(),
