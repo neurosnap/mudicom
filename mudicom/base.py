@@ -88,6 +88,7 @@ class Dicom(object):
 
         self._image = None
         self._anon_obj = None
+        self._anon_tags = None
         self._errors = None
         self._warnings = None
 
